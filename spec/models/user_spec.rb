@@ -15,6 +15,8 @@ RSpec.describe User, type: :model do
   it { should_not respond_to(:password_confirmation) }
 
   it { should be_valid }
+  it { should respond_to(:authenticate) }
+
 
   describe "when name is not present" do
   	before { @user.name = " " }
@@ -34,6 +36,11 @@ RSpec.describe User, type: :model do
   describe "when password confirmation is nil" do
   	before { @user.password_confirmation = nil }
   	it { should_not be_valid }
+  end
+
+  describe "with a password that's too short" do
+  	before { @user.password = @usrer.password_confirmation = "a" * 5 }
+  	it { should be_invalid }
   end
   
   describe "when email is not present" do
@@ -72,6 +79,22 @@ RSpec.describe User, type: :model do
   		user_with_same_email.save
   	end
   	it { should_not be_valid }
+  end
+
+  describe "return value of authenticate method" do
+  	before { @user.save }
+  	let(:found_user) { User.find_by_email(@user.email) }
+
+  	describe "with valid password" do
+  		it { should == found_user.authenticate(@user.password) }
+  	end
+
+  	describe "with invalid password" do
+  		let(:user_for_invalid_password) { found_user.authenticate("invalid") }
+
+  		it { should_not == user_for_invalid_password }
+  		specify{ user_for_invalid_password should be_false }
+  	end
   end
 end
 
