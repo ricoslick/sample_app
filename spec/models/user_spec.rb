@@ -16,6 +16,9 @@ RSpec.describe User, type: :model do
 
   it { should be_valid }
   it { should respond_to(:authenticate) }
+  it { should respond_to(:password_confirmation) }
+  it { should respond_to(:remember_token) }
+  it { should respond_to(:authenticate) }
 
 
   describe "when name is not present" do
