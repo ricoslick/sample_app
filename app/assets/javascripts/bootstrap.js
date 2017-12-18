@@ -25,6 +25,10 @@ if (typeof jQuery === 'undefined') {
  * ======================================================================== */
 
 
+$(document).ready(function() {
+    $(".dropdown-toggle").dropdown();
+});
+
 +function ($) {
   'use strict';
 
