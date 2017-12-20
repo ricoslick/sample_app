@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-	before_action :signed_in_user, only: [:edit, :update]
+	before_action :signed_in_user,  only: [:edit, :update]
+	before_action :correct_user,	only: [:edit, :update]
   def new
   	@user = User.new
   end
@@ -42,6 +43,7 @@ class UsersController < ApplicationController
   end
 
   def signed_in_user
+  	store_location
   	redirect_to signin_path, notice: "Please sign in." unless signed_in?
   end
 
