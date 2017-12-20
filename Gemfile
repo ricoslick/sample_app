@@ -10,6 +10,8 @@ end
 gem 'rails', '~> 5.1.4'
 gem 'bootstrap-sass', '3.3.7'
 gem 'bcrypt'
+gem 'will_paginate', '3.1.6'
+gem 'bootstrap-will_paginate'
 
 
 # Use sqlite3 as the database for Active Record
