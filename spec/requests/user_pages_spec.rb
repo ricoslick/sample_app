@@ -23,6 +23,26 @@ RSpec.describe "User pages" do
 	  			end
 	  		end
 	  	end
+
+	  	describe "delete links" do
+
+  			it { should_not have_link('delete') }
+
+  			describe "as an admin user" do
+
+  				before do
+  					sign_in admin
+  					visit user_path
+  				end
+
+  				it { should have_link('delete', href: user_path(User.first)) }
+  				it "should be able to delete another user" do
+  					except { click_link('delete') }.to change(User, :count).by(-1)
+  				end
+
+  				it { should_not have_link('delete', href: user_path(admin)) }
+  			end
+  		end
   	end
 
   	describe "signup page" do
@@ -99,26 +119,6 @@ RSpec.describe "User pages" do
   			it { should have_link('Sign out', href: signout_path) }
   			specify { user.reload.name.should == new_name }
   			specify { user.reload.email.should == new_email }
-  		end
-
-  		describe "delete links" do
-
-  			it { should_not have_link('delete') }
-
-  			describe "as an admin user" do
-
-  				before do
-  					sign_in admin
-  					visit user_path
-  				end
-
-  				it { should have_link('delete', href: user_path(User.first)) }
-  				it "should be able to delete another user" do
-  					except { click_link('delete') }.to change(User, :count).by(-1)
-  				end
-
-  				it { should_not have_link('delete', href: user_path(admin)) }
-  			end
   		end
   	end
 end
