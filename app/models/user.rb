@@ -2,6 +2,7 @@ class User < ApplicationRecord
 	include ActiveModel::ForbiddenAttributesProtection
 	
 	has_secure_password
+	has_many :microposts
 
 	before_save { |user| user.email = email.downcase }
 	before_save :create_remember_token

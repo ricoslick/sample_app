@@ -23,6 +23,8 @@ RSpec.describe User, type: :model do
   it { should respond_to(:admin) }
   it { should respond_to(:authenticate) }
 
+  it{ should respond_to(:microposts) }
+
   it { should be_valid }
   it { should_not be_admin }
 
@@ -117,6 +119,15 @@ RSpec.describe User, type: :model do
   describe "remember token" do
   	before { @user.save } 
   	its(:remember_token) { should_not be_blank }
+  end
+
+  describe "micropost associations" do
+
+  	before { @user.save }
+
+  	it "should have the right microposts in the right order" do
+  		@user.microposts.should == [newer_micropost, older_micropost]
+  	end
   end
 end
 
