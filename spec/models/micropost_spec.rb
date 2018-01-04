@@ -13,7 +13,7 @@ RSpec.describe Micropost, type: :model do
 
   describe "accessible attributes" do
   	it "should not allow access to user_id" do
-  		except do
+  		expect do
   			Micropost.new(user_id: user.id)
   		end.should raise_error(ActiveModel::MassAssignmentSecurity::Error)
   	end
@@ -22,5 +22,15 @@ RSpec.describe Micropost, type: :model do
   describe "when user _id is not present" do
   	before { @micropost.user_id = nil }
   	it { should_not be_valid }
+  end
+
+  describe "with blank content" do
+    before { @micropost.content = " " }
+    it { should_not be_valid }
+  end
+
+  describe "with content that is too long" do
+    before { @micropost.content = "a" * 281 }
+    it { should_not be_valid }
   end
 end
