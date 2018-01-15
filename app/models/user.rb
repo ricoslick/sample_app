@@ -15,6 +15,12 @@ class User < ApplicationRecord
 	validates(:password, presence: true, length: { minimum: 6 })
 	validates(:password_confirmation, presence: true)
 
+	def feed
+		# This is preliminary. See "following users" for the full implementation.
+		Micropost.where("user_id = ?", id)
+	end
+
+
 	private
 
 		def create_remember_token

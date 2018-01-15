@@ -23,7 +23,8 @@ RSpec.describe User, type: :model do
   it { should respond_to(:admin) }
   it { should respond_to(:authenticate) }
 
-  it{ should respond_to(:microposts) }
+  it { should respond_to(:microposts) }
+  it { should respond_to(:feed) }
 
   it { should be_valid }
   it { should_not be_admin }
@@ -129,12 +130,19 @@ RSpec.describe User, type: :model do
   		@user.microposts.should == [newer_micropost, older_micropost]
   	end
 
+<<<<<<< HEAD
     it "should destroy associated microposts" do
       microposts = @user.microposts
       @user.destroy
       microposts.each do |micropost|
         Micropost.find_by_id(micropost.id).should be_nil 
       end
+=======
+    describe "status" do
+      its(:feed) { should include(newer_micropost) }
+      its(:feed) { should include(older_micropost) }
+      its(:feed) { should_not include(unfollowed_post) }
+>>>>>>> user-microposts
     end
   end
 end

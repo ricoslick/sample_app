@@ -1,8 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe "MicropostPages", type: :request do
+<<<<<<< HEAD
 
 	subject { page }
+=======
+ 	subject { page }
+>>>>>>> user-microposts
 
 	before { sign_in user }
 
