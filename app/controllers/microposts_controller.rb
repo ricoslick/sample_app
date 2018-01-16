@@ -3,15 +3,16 @@ class MicropostsController < ApplicationController
 	before_action :signed_in_user, only: [:create, :destroy]
 
   def new
+    @micropost = Micropost.new
   end
 
   def index
   end
 
   def create
-  	 Micropost.create(micropost_params)
+  	Micropost.new(micropost_params)
 
-    @micropost = current_user.microposts.build(params[:micropost])
+    @micropost = current_user.microposts.build(micropost_params)
 
     if @micropost.save
       flash[:success] = "Micropost created!"
