@@ -16,7 +16,7 @@ gem 'bootstrap-will_paginate'
 
 # Use sqlite3 as the database for Active Record
 group :development, :test do
-	gem 'pg'
+	gem 'pg', '~> 0.21.0'
 	gem 'rspec-rails'
 end
 group :production do
