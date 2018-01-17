@@ -20,7 +20,7 @@ group :development, :test do
 	gem 'rspec-rails'
 end
 group :production do
-	gem 'pg'
+	gem 'pg', '~> 0.21.0'
 end
 group :asset do
 	# Use Puma as the app server
