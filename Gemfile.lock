@@ -211,7 +211,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   coffee-script-source (= 1.8.0)
   jbuilder (~> 2.5)
-  pg
+  pg (~> 0.21.0)
   puma (~> 3.7)
   rails (~> 5.1.4)
   rspec-rails
