@@ -35,6 +35,7 @@ class User < ApplicationRecord
 
 	def unfollow!(other_user)
 		relationships.find_by_followed_id(other_user.id).destroy
+	end
 
 	private
 
@@ -42,4 +43,3 @@ class User < ApplicationRecord
 			self.remember_token = SecureRandom.urlsafe_base64
 		end
 end
-
