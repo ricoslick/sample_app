@@ -143,9 +143,20 @@ RSpec.describe User, type: :model do
       end
 =======
     describe "status" do
+
+      before do
+        @user.follow!(followed_user)
+        3.times { followed_user.microposts.create!(:user) }
+      end 
+
       its(:feed) { should include(newer_micropost) }
       its(:feed) { should include(older_micropost) }
       its(:feed) { should_not include(unfollowed_post) }
+      its(:feed) do
+        followed_user.microposts.each do
+          should include(micropost)
+        end
+      end
 >>>>>>> user-microposts
     end
 
